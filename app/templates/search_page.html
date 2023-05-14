@@ -1,0 +1,49 @@
+
+{% extends "dashboard.html" %}
+
+{% block content %}
+
+  <div class="ui container" style="padding-top: 20px;">
+    <h1 class="ui header" style="color: white;">Song search</h1>
+    <div class="ui action input">
+      <input type="text" id="search-input" placeholder="Search songs..." />
+      <button class="ui button" id="search-button">Search</button>
+    </div>
+    <div id="search-results-container">
+      <div class="ui active dimmer" id="search-spinner" style="display: none;">
+        <div class="ui large text loader">Loading</div>
+      </div>
+      <div class="ui stackable four cards" id="search-results" style="padding-top: 20px;"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  <script>
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const searchResultsContainer = document.getElementById('search-results-container');
+    const searchSpinner = document.getElementById('search-spinner');
+    const searchResults = document.getElementById('search-results');
+
+    searchButton.addEventListener('click', async () => {
+      const query = searchInput.value;
+      searchSpinner.style.display = "block";
+      const response = await axios.get(`/dashboard/search?q=${query}`);
+      const songs = response.data;
+      searchSpinner.style.display = "none";
+      searchResults.innerHTML = songs
+        .map(song => `
+        <div class="ui card">
+          <div class="content" style="padding-bottom: 10px;">
+            <img src="${song.image_url}" class="ui image" />
+            <div class="header" style="padding-top: 8px;">${song.track_name}</div>
+            <div class="meta">${song.track_artist}</div>
+            <div class="description">${song.album_name}</div>
+          </div>
+        </div>
+        
+        `)
+        .join('');
+    });
+  </script>
+{% endblock %}

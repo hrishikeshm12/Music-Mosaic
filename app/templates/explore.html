@@ -1,0 +1,171 @@
+{% extends "dashboard.html" %}
+ {% block content %}
+
+
+  
+
+ <div class="ui top attached tabular menu">
+  <a class="active item" data-tab="discover" onclick="toggleTab('discover')" style="color: white;">
+    Discover
+  </a>
+  <a class="item" data-tab="top-artist" onclick="toggleTab('top-artist')" style="color: white;">
+    Top Artists
+  </a>
+  <a class="item" data-tab="top-charts" onclick="toggleTab('top-charts')" style="color: white;">
+    Top Charts
+  </a>
+  
+  <div class="right menu">
+    <div class="item">
+      <div class="ui transparent icon input">
+        <input type="text" placeholder="Search users...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui bottom attached segment" id="discover-content" style="display: block;">
+
+  <div class="ui four stackable cards">
+      
+    {% for new_tracks in new_releases %}
+      <div class="card">
+        <div class="image">
+          <img src="{{ new_tracks['image'] }}">
+        </div>
+        <div class="content">
+          <div class="header">{{ new_tracks['name'] }}</div>
+        
+          <div class="description">
+            <p><strong>Album:</strong> {{ new_tracks['artist'] }}</p>
+            <p><strong>Release Date:</strong> {{ new_tracks['release_date'] }}</p>
+            
+            <p><strong>Total Tracks:</strong> {{ new_tracks['total_tracks'] }}</p>
+            
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+<div class="ui bottom attached segment" id="top-artist-content" style="display: none;">
+ 
+  <div class="ui four stackable cards">
+      
+    {% for artist in top_artists %}
+      <div class="card">
+        <div class="image">
+          <img src="{{ artist['image'] }}">
+        </div>
+        <div class="content">
+          <div class="header">{{ artist['name'] }}</div>
+        
+          <div class="description">
+            <p><strong>Album:</strong> {{ artist['album'] }}</p>
+            <p><strong>Song:</strong> {{ artist['song'] }}</p>
+                
+            <p><strong>Followers:</strong> {{ artist['followers'] }}</p>
+            <p><strong>Popularity:</strong> {{ artist['popularity'] }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+<div class="ui bottom attached segment" id="top-charts-content" style="display: none;">
+  
+  <div class="ui four stackable cards">
+    {% for song in top_tracks %}
+      <div class="card">
+        <div class="image">
+          <img src="{{ song['image'] }}">
+        </div>
+        <div class="content">
+          <div class="header">{{song['name'] }}</div>
+          <div class="description">
+            <p>Singer: {{ song['singer']  }}</p>
+            <p>Album: {{ song['album'] }}</p>
+            <p>Populairty: {{ song['popularity'] }}</p>
+            <p>Views: {{ song['total_views'] }}</p>
+          </div>
+        </div>
+        <div class="extra content">
+          <audio src="{{song['audio']}}" id="audio-{{song['id']}}" onended="resetAudio('audio-{{song['id']}}')"></audio>
+          <button class="btn btn-primary" onclick="play('audio-{{song['id']}}')">Play</button>
+          <button class="btn btn-secondary" onclick="pause('audio-{{song['id']}}')">Pause</button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+
+
+<script>
+  function toggleTab(tabName) {
+    // Hide all content sections
+    var contentSections = document.getElementsByClassName("ui bottom attached segment");
+    for (var i = 0; i < contentSections.length; i++) {
+      contentSections[i].style.display = "none";
+    }
+    
+    // Highlight the clicked tab and show the corresponding content section
+    var tabs = document.getElementsByClassName("item");
+    for (var i = 0; i < tabs.length; i++) {
+      if (tabs[i].getAttribute("data-tab") == tabName) {
+        tabs[i].classList.add("active");
+      } else {
+        tabs[i].classList.remove("active");
+      }
+    }
+    document.getElementById(tabName + "-content").style.display = "block";
+  }
+
+  
+
+  var currentAudio = null;
+
+  function play(id) {
+    var audio = document.getElementById(id);
+    if (currentAudio !== null && currentAudio !== audio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+    }
+    audio.play();
+    currentAudio = audio;
+  }
+  
+  function pause(id) {
+    var audio = document.getElementById(id);
+    audio.pause();
+    currentAudio = null;
+  }
+  
+  function resetAudio(id) {
+    var audio = document.getElementById(id);
+    currentAudio = null;
+  }
+
+</script>
+
+<style>
+  .ui.transparent.icon.input input::placeholder {
+    color: white;
+  }
+  
+  .ui.top.attached.tabular.menu a.active.item {
+    background-color: transparent;
+    color: white;
+  }
+  
+
+</style>
+
+
+
+ {% endblock %}

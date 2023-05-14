@@ -1,0 +1,26 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+
+<h1 class="ui header" style="color: white; padding: 10px 20px;">Recommended Songs</h1>
+<div class="ui four stackable cards" style="padding: 10px 20px;">
+  {% for song in songs %}
+  <div class="card">
+    <div class="image">
+      <img src="{{ song['image_url'] }}">
+    </div>
+    <div class="content">
+      <div class="header">{{song['track_name'] }}</div>
+      <div class="description">
+        <p><strong>Track Artist: </strong>{{ song['track_artist']  }}</p>
+        <p><strong>Playlist Genre: </strong>{{ song['playlist_genre'] }}</p>
+        <p><strong>Release Date: </strong>{{ song['track_album_release_date'] }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+    
+  
+{% endblock %}

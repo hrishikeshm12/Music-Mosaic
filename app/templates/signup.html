@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+ {% block content %}
+<div class="card-wrapper">
+  <div class="card1">
+    <h1 class="center">Create an Account</h1>
+
+    <form name="signup_form">
+
+      <label for="name" style="font-family: 'Playfair Display', serif;color: white;">First Name</label>
+      <div class="ui fluid left icon input">
+        <input type="text" name="fname" placeholder="First Name" required>
+        <i class="user icon"></i>
+      </div>
+
+      <label for="name" style="font-family: 'Playfair Display', serif;color: white;">Last Name</label>
+      <div class="ui fluid left icon input">
+        <input type="text" name="lname" placeholder="Last Name" required>
+        <i class="user icon"></i>
+      </div>
+
+      <label for="name" style="font-family: 'Playfair Display', serif;color: white;">Username</label>
+      <div class="ui fluid left icon input">
+        <input type="text" name="username" placeholder="Username" required>
+        <i class="id badge icon"></i>
+      </div>
+
+      <label for="email" style="font-family: 'Playfair Display', serif;color: white;">Email</label>
+      <div class="ui fluid left icon input">
+        <input type="email" name="email" placeholder="Email" required>
+        <i class="envelope icon"></i>
+      </div>
+
+     
+      <label for="password" style="font-family: 'Playfair Display', serif;color: white;">Password</label>
+      <div class="ui fluid left icon input">
+        <input type="password" name="password" placeholder="Password" required>
+        <i class="lock icon"></i>
+      </div>
+      <p class="error error--hidden"></p>
+
+      <div class="loginbutton">
+        <input type="submit" value="Sign Up" class="ui secondary button">
+      </div>
+      
+    </form>
+
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,140 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+
+    <link rel="stylesheet" href="/static/css/components.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Music Mosaic</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+  </head>
+  <body style="background-image: url({{ url_for('static', filename='images/background-1.jpg') }});background-size: cover;">
+  <div class="content">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <div class="navigation-bar">
+
+      <nav class="navbar  navbar-expand-sm ">
+        
+        <a class="navbar-brand" href="/dashboard">
+          
+          <div class="d-inline-block align-bottom"><button class="ui twitter button">
+            
+            Music Mosiac
+          </button></div>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/dashboard/home"> <button class="ui inverted primary button" style="color: white;">Home</button><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/dashboard/mysongs"><button class="ui inverted primary button" style="color: white;">My Songs</button><span class="sr-only"></span><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/dashboard/recommendation"><button class="ui inverted primary button" style="color: white;">Recommend</button><span class="sr-only"><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/dashboard/explore"><button class="ui inverted primary button" style="color: white;">Explore</button><span class="sr-only"> <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/dashboard/searchpage"><button class="ui inverted primary button" style="color: white;">Search</button><span class="sr-only"><span class="sr-only">(current)</span></a>
+            </li>
+          
+            
+          </ul>
+          <div class="collapse multi-collapse pr-2" id="multiCollapseExample1">
+            <div class="card card-body">
+              <h4 >User Information</h4>
+              <ul>
+                <li> <strong>ID:</strong> {{ session['user']['_id'] }}</li>
+                <li><strong>Username:</strong> {{ session['user']['username'] }}</li>
+                <li><strong>Email:</strong> {{ session['user']['email'] }}</li>
+              </ul>
+            </div>
+          </div> 
+          <div class="infobutton"><button type="button" class="btn btn-outline-info mr-2" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">{{ session['user']['username'] }}</button></div>
+          
+          <div class="logoutbutton"><a href="/user/signout" class="btn btn-outline-danger my-2 my-sm-0">Logout</a>
+          </div>
+          
+            
+          
+        </div>
+        
+      </nav>
+      
+        
+    </div>
+  
+   
+    {% block content %}
+
+    <style>
+      .desc {
+       
+        margin-top: 100px;
+       
+      }
+      
+    </style>
+    <div class="desc">
+    <div class="ui container">
+      <div class="ui five cards">
+        <div class="card">
+          <div class="content">
+            <div class="header">Home Page</div>
+            <div class="description">The Home page displays a selection of random songs from various genres, allowing the user to discover new music. They can save the songs to their library if they like them. Additionally, they can also like the songs to indicate their preference.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">My Songs Page</div>
+            <div class="description">The My Songs page displays a list of all the songs that the user has added to their library. They can sort and filter the songs based on various criteria, such as artist, album, genre, and date added.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">Recommend Page</div>
+            <div class="description">The Recommend page suggests new songs to the user based on their listening history and preferences. The user can view a list of recommended songs and add them to their library if they like them.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">Explore Page</div>
+            <div class="description">The Explore page allows the user to discover new music based on various categories, such as genre, mood, and decade. They can browse through different songs, listen to theitr audio, and add them to their library if they like them.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">Search Page</div>
+            <div class="description">The Search page lets the user search for specific songs, artists, albums, or playlists. They can enter keywords in the search bar and view a list of matching results. They can also filter the results based on various criteria.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+    
+    {% endblock %}
+
+  </div>
+  </body>
+</html>

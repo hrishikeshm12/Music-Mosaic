@@ -1,0 +1,241 @@
+/*
+  Colors: http://getuicolors.com
+*/
+
+
+/* Setup */
+:root {
+  --black: #000000;
+  --almost-black: #263238;
+  --white: #ffffff;
+  --almost-white: #FBFBFB;
+  --grey-light: #CFD8DC;
+  --grey: #B0BEC5;
+  --grey-medium: #78909C;
+  --grey-dark: #455A64;
+  --primary: #1E88E5;
+  --primary-dark: #1976D2;
+  --secondary: #CFD8DC;
+  --secondary-dark: #B0BEC5;
+  --red: #EF4836;
+}
+
+* {
+  position: relative;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--black);
+  background-image:  url_for('static', filename='images/loginbackground.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  
+}
+
+/* Typography */
+.center {
+  text-align: center;
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+}
+
+h1 {
+  margin: 0.5em 0 1em;
+  font-size: 36px;
+  line-height: 1.2;
+  color: white;
+  font-family: 'Playfair Display', serif;
+}
+
+h2 {
+  margin: 0.5em 0 1em;
+  font-size: 20px;
+  line-height: 1.2;
+  color: white;
+  font-family: 'Playfair Display', serif;
+}
+
+p {
+  margin: 24px 0;
+  font-family: 'Optima', sans-serif;
+}
+
+/* Cards */
+.card-wrapper {
+  margin: 0 auto;
+  margin-top: 60px;
+  padding: 90px 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  display: flex;
+ 
+  
+}
+
+.card1 {
+  margin: 0 30px 50px;
+  padding: 20px 40px;
+  width: 450px;
+  
+  border-radius: 10px;
+  box-shadow: 0 0 10px 5px #ccc;
+  float: right;
+  background-color: rgba(0,0,0,.5);
+  color: #fff;
+}
+
+@media only screen and (max-width: 520px) {
+  .card-wrapper {
+    padding: 30px 0 0;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .card {
+    margin: 0 0 30px;
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
+/* Forms */
+form {
+  transition: opacity .15s ease;
+}
+
+form.loading {
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+label {
+  margin: 0 0 2px;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 1px;
+  color:white;
+  display: block;
+}
+
+.field {
+  margin: 0 0 24px;
+  padding: 11px 16px 9px;
+  width: 100%;
+  font-size: 16px;
+  font-family: 'Optima', sans-serif;
+  line-height: 26px;
+  color: var(--almost-black);
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  display: block;
+  background: white;
+  transition: border-color .15s ease;
+  
+}
+
+.field:focus {
+  border-color: var(--grey-medium);
+  outline: none;
+}
+
+.error {
+  margin: 0;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: center;
+  color: var(--red);
+  font-family: 'Optima', sans-serif;
+}
+
+.error--hidden {
+  display: none;
+}
+
+/* Buttons */
+.loginbutton {
+  margin: 0 0 24px;
+  padding: 11px 30px 10px;
+  text-align: center;
+  font-family: 'Optima', sans-serif;
+ 
+}
+
+.cbtn:hover {
+  background: #B65A4A;
+}
+
+.cbtn--secondary {
+  color: var(--almost-black);
+  background: var(--secondary);
+}
+
+.cbtn--secondary:hover {
+  background: var(--secondary-dark);
+}
+
+input[type=submit] {
+  margin: 34px auto 24px;
+  display: block;
+}
+
+.logindiv{
+  float: center;
+  margin-left: auto;
+   margin-right: auto;
+}
+
+
+
+.company-section {
+  width: 60%;
+  float: left;
+  margin: 50px auto;
+  margin-top: 5px;
+  margin-left: 40px;
+  margin-right: 10px;
+  text-align: center;
+  padding: 40px;
+  padding-top: 10px;
+  background-color: rgba(0,0,0,.5);
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 5px #ccc;
+  height: 670px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  
+}
+
+.company-name {
+  font-size: 36px;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  color: #fff7ae;
+  margin-bottom: 20px;
+}
+
+.company-desc {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.5;
+  font-family: 'Optima', sans-serif;
+  text-align: left;
+}
+
+.imageslide{
+  align-items: center;
+  display: flex;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  margin-left: 80px;
+}

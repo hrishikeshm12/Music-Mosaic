@@ -1,0 +1,128 @@
+{% extends "dashboard.html" %}
+
+
+{% block content %}
+<div class="ui top attached tabular menu" >
+  <a class="active item" data-tab="liked-songs" onclick="openTab(this)" style="color: white;">
+    Liked Songs
+  </a>
+  <a class="item" data-tab="saved-songs" onclick="openTab(this)" style="color: white;">
+    Saved Songs
+  </a>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui transparent icon input">
+        <input type="text" placeholder="Search songs...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui bottom attached transparent segment" data-tab="liked-songs">
+  <div class="ui four stackable cards">
+    {% for song in liked_songs %}
+    <div class="card" id="{{ song['track_id'] }}">
+      <div class="image">
+        <img src="{{ song['image_url'] }}">
+      </div>
+      <div class="content">
+        <div class="header">{{song['track_name'] }}</div>
+        <div class="description">
+          <p><strong>Artist: </strong>{{ song['track_artist']  }}</p>
+          <p><strong>Genre: </strong>{{ song['playlist_genre'] }}</p>
+        </div>
+      </div>
+      <div class="extra content">
+        <button class="ui icon button" onclick="deleteSong('{{ song['track_id'] }}', 'liked')">
+          <i class="trash icon"></i>
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="ui bottom attached transparent segment" data-tab="saved-songs">
+  <div class="ui four stackable cards">
+    {% for song in saved_songs %}
+    <div class="card" id="{{ song['track_id'] }}">
+      <div class="image">
+        <img src="{{ song['image_url'] }}">
+      </div>
+      <div class="content">
+        <div class="header">{{song['track_name'] }}</div>
+        <div class="description">
+          <p>{{ song['track_artist']  }}</p>
+          <p>{{ song['playlist_genre'] }}</p>
+        </div>
+      </div>
+      <div class="extra content">
+        <button class="ui icon button" onclick="deleteSong('{{ song['track_id'] }}', 'saved')">
+          <i class="trash icon"></i>
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+  function openTab(element) {
+    // Get the data-tab attribute of the clicked tab
+    var tab = $(element).data('tab');
+
+    // Remove the 'active' class from all tabs
+    $('.ui.top.attached.tabular.menu .item').removeClass('active');
+
+    // Add the 'active' class to the clicked tab
+    $(element).addClass('active');
+
+    // Hide all tab contents
+    $('.ui.bottom.attached.segment').hide();
+
+    // Show the content of the clicked tab
+    $('.ui.bottom.attached.segment[data-tab="' + tab + '"]').show();
+  }
+
+  function deleteSong(track_id, tab) {
+    $.ajax({
+      url: '/dashboard/delete_song',
+      type: 'POST',
+      data: JSON.stringify({track_id: track_id, tab: tab}),
+      contentType: 'application/json',
+      success: function(response) {
+        // If the song was deleted successfully, remove the card from the DOM
+        $('#' + track_id).remove();
+      },
+      error: function(xhr) {
+        // If there was an error, log it to the console
+        console.log(xhr.responseText);
+      }
+    });
+  }
+  
+
+
+  $(window).on('load', function() {
+    // After the page is loaded, hide the dimmer
+    $('.ui.dimmer').fadeOut();
+     }); 
+
+</script>
+
+<style>
+  .ui.transparent.icon.input input::placeholder {
+    color: white;
+  }
+  
+  .ui.top.attached.tabular.menu a.active.item {
+    background-color: transparent;
+    color: white;
+  }
+  
+
+</style>
+
+{% endblock %}

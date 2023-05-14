@@ -1,0 +1,106 @@
+{% extends "dashboard.html" %}
+
+ {% block content %}
+
+
+  <div class="ui active dimmer">
+    <div class="ui text loader">Loading</div>
+  </div> 
+
+
+  <div class="songcard">
+
+    <div class="ui container">
+      <h1 class="ui header" style="color: white;">Random Songs</h1>
+      
+      <div class="ui stackable four column grid" id="card-container">
+        {% for song in home_songs %}
+        <div class="column">
+          <div class="ui card">
+            <div class="image">
+              <img src="{{ song['image_url'] }}">
+            </div>
+            <div class="content">
+              <a class="header">{{song['track_name'] }}</a>
+              <div class="meta">
+                <span class="date">{{ song['track_artist']  }}</span>
+              </div>
+              <div class="description">
+                {{ song['playlist_genre'] }}
+              </div>
+            </div>
+            <div class="extra content">
+              <div class="ui labeled button" tabindex="0">
+                <div class="ui red button" id="like-button"  onclick="updateLikes('{{ song['track_id'] }}','{{ session['user']['_id'] }}')" >
+                  <i class="heart icon"></i> Like
+                </div>
+                <a class="ui basic red left pointing label"  id="like-count-{{ song['track_id'] }}">
+                  {{ song['total_likes']  }}
+                </a>
+              </div>
+              
+              <div class="ui right labeled button" tabindex="0">
+                <a class="ui basic blue button" id="save-button" onclick="updateSaves('{{ song['track_id'] }}','{{ session['user']['_id'] }}')">
+                  <i class="save icon"></i> Save
+                </a>
+                <a class="ui blue basic left pointing label" id="save-count-{{ song['track_id'] }}">
+                  {{ song['total_saves']  }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+ </div>
+ </div>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script>
+
+function updateLikes(track_id, user_id) {
+  $.ajax({
+    url: '/dashboard/update_likes',
+    type: 'POST',
+    data: { track_id: track_id, user_id: user_id },
+    success: function(response) {
+      $('#like-count-' + track_id).text(response.likes);
+      if (response.message) {
+        alert(response.message);
+      }
+    },
+    error: function(error) {
+      console.log(error);
+    }
+  });
+}
+
+
+function updateSaves(track_id, user_id) {
+  $.ajax({
+    url: '/dashboard/update_saves',
+    type: 'POST',
+    data: { track_id: track_id, user_id: user_id },
+    success: function(response) {
+      $('#save-count-' + track_id).text(response.saves);
+      if (response.message) {
+        alert(response.message);
+      }
+    },
+    error: function(error) {
+      console.log(error);
+    }
+  });
+}
+
+     $(window).on('load', function() {
+    // After the page is loaded, hide the dimmer
+    $('.ui.dimmer').fadeOut();
+     }); 
+</script>
+    
+
+ 
+ {% endblock %}
+
+ 

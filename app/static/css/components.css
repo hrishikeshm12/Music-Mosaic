@@ -1,0 +1,57 @@
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    background-color: #f1f1f1;
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    margin-top: 65px;
+}
+
+.homesearchdiv{
+    
+    align-items: center;
+    padding: 20px;
+    width: 800px;
+    margin-left: 500px;
+    margin-top: 30px;
+
+}
+
+.songcard{
+    display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: stretch;
+	padding: 1rem;
+    margin-top: 20px;
+}
+
+.refresh_button{
+    width: auto;
+    height: 15px;
+    margin: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
+
+}
+
+.ui.labeled.button:first-child {
+    margin-bottom: 10px;
+}
+
+.content{
+    
+        background-image:  url_for('static', filename='images/background-1.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+}
+
+.ui.top.attached.menu,
+.ui.bottom.attached.segment {
+  background: transparent !important;
+}
