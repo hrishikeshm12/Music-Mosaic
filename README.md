@@ -1,5 +1,5 @@
-# dynamic-song-recommendation
-A dynamic song recommendation website which generates personalized recommendations based on user preferences.
+# Music Mosaic
+A dynamic song recommendation website that generates personalized recommendations based on user preferences.
 Music Mosaic is a platform where users can discover new and exciting music. The website uses advanced algorithms to analyze a user's listening habits and recommend music that is tailored to their specific taste. Whether you're into pop, rock, hip-hop, or any other genre, Music Mosaic can help you find new artists and tracks that you'll love. With a vast library of songs and a user-friendly interface, making it easy for music fans to explore new sounds and expand their musical horizons. Whether you're a seasoned audiophile or just starting to build your music collection, Music Mosaic is a great resource for discovering new and exciting music.
 
 1.	Home Page 
